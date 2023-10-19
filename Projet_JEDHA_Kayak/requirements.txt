@@ -1,0 +1,16 @@
+requests
+json
+pandas
+datetime
+numpy
+plotly.express
+plotly.graph_objects
+plotly.io
+matplotlib.pyplot
+os
+logging
+scrapy
+time
+boto3
+fsspec
+s3fs
