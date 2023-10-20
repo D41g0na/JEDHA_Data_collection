@@ -1,5 +1,5 @@
 requests
-json
+json == 4.5.3
 pandas
 datetime
 numpy
