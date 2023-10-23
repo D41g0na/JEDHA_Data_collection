@@ -95,7 +95,7 @@ for Latitude, Longitude in zip(df_Lat, df_Long) :
                'units': 'metric',
                'exclude': ",".join(exclusion),
                'lang': 'fr',
-               'appid': '55f185c705873ecc66868f2f65815bb6'
+               'appid': MY_API_KEY
               }
     w = requests.get('https://api.openweathermap.org/data/3.0/onecall', params = infos_w )
     response_w = w.json()
