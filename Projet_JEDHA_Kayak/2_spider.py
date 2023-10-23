@@ -8,7 +8,7 @@ import json
 import time
 import boto3
 
-cities_weather= pd.read_csv('top_10_destination.csv')
+cities_weather= pd.read_csv('s3://jedhakayak/top_10_destination.csv')
  
 #Création du spider
 class HotelInfoSpider(scrapy.Spider):
