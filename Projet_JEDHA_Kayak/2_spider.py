@@ -7,6 +7,7 @@ from scrapy.crawler import CrawlerProcess
 import json
 import time
 import boto3
+from decouple import config
 
 cities_weather= pd.read_csv('s3://jedhakayak/top_10_destination.csv')
  
@@ -78,8 +79,13 @@ Hotel_info['latitude'] = Hotel_info['latitude'].apply(lambda x: np.round(x, 4))
 Hotel_info['longitude'] = Hotel_info['longitude'].astype(float)
 Hotel_info['longitude'] = Hotel_info['longitude'].apply(lambda x: np.round(x, 4))
 
+#Charger les variable d'environnement
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+
 #Envoie des données vers s3
-session = boto3.Session(profile_name='default')
+session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
+                        aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
 s3 = boto3.resource('s3')
 
