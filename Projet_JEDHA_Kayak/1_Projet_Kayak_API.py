@@ -135,12 +135,12 @@ cities_weather['Température_médiane'] = cities_weather[colonnes_temperature].m
 cities_weather['amplitude_temp'] = cities_weather[colonnes_temperature].apply(lambda row: row.max() - row.min(), axis=1)
 
 #probabilités de précipitations pour chaque ville
-cities_weather['Proba_précipitation_moyenne'] = cities_weather[colonnes_temperature].mean(axis=1)
-cities_weather['Proba_précipitation_médiane'] = cities_weather[colonnes_temperature].median(axis=1)
+cities_weather['Proba_précipitation_moyenne'] = cities_weather[colonnes_proba_precipitation].mean(axis=1)
+cities_weather['Proba_précipitation_médiane'] = cities_weather[colonnes_proba_precipitation].median(axis=1)
 cities_weather['amplitude_proba_précitpitation'] = cities_weather[colonnes_proba_precipitation].apply(lambda row: row.max() - row.min(), axis=1)
 
 #Création de top_10_destination
-sorted_cities_weather= cities_weather.sort_values(['amplitude_proba_précitpitation','Proba_précipitation_moyenne'], ascending=[True, False])
+sorted_cities_weather= cities_weather.sort_values(['amplitude_proba_précitpitation','Température_moyenne'], ascending=[True, False])
 top_10_destination = sorted_cities_weather.iloc[:10]
 
 #Envoie des données vers s3
