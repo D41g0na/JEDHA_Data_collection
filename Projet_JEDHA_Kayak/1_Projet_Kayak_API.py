@@ -10,6 +10,7 @@ import plotly.io as pio
 import matplotlib.pyplot as plt
 import os
 import boto3
+from decouple import config
 
 #récuperer les villes et leur coordonnée géographique
 lst= ["Mont Saint Michel", 
@@ -79,6 +80,10 @@ df_cities_gps['Longitude'] = df_cities_gps['Longitude'].apply(lambda x: np.round
 df_cities_gps.head()
 
 #Utilisation de l'API OpenWeather, récupération des informations
+MY_API_KEY = config('MY_API_KEY')
+if not MY_API_KEY:
+    raise ValueError("La clé d'API MY_API_KEY n'a pas été configurée correctement dans le fichier .env")
+  
 df_Lat = df_cities_gps['Latitude']
 df_Long = df_cities_gps['Longitude']
 exclusion= ['current','minutely', 'hourly', 'alerts']
@@ -143,8 +148,13 @@ cities_weather['amplitude_proba_précitpitation'] = cities_weather[colonnes_prob
 sorted_cities_weather= cities_weather.sort_values(['amplitude_proba_précitpitation','Température_moyenne'], ascending=[True, False])
 top_10_destination = sorted_cities_weather.iloc[:10]
 
+#Charger les variables d'environnement depuis kayak.env
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+
 #Envoie des données vers s3
-session = boto3.Session(profile_name='default',
+session = boto3.Session( aws_access_key_id=AWS_ACCESS_KEY_ID,
+                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                          region_name="eu-west-3"
                         )
 
