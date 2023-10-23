@@ -15,6 +15,7 @@ This is a mandatory project for my Data Collection and Management certification:
 ### Prerequisites
 
 pip install -r requirements.txt
+pip install python-decouple #afin d'avoir les credentials.
 
 ### Installation
 
