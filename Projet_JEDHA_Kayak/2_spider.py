@@ -47,7 +47,7 @@ class HotelInfoSpider(scrapy.Spider):
     def parse_details(self, response):
         return {**response.meta,
                 'point fort': response.xpath('//*[@class="a5a5a75131"]/text()').getall(),
-                "coordonnées": response.xpath('//*[@id="hotel_sidebar_static_map"]').attrib["data-atlas-latlng"]}       
+                "coordonnées": response.xpath('//*[@id="hotel_address"]').attrib["data-atlas-latlng"]}       
                   
 #Création d'un json
 filename = "Hotel_info.json"
